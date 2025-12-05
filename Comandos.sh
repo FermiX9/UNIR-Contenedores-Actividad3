@@ -21,8 +21,11 @@ NAME                            STATUS   ROLES    AGE   VERSION
 ip-172-31-16-23.ec2.internal    Ready    <none>   13m   v1.33.5-eks-ecaa3a6
 ip-172-31-92-198.ec2.internal   Ready    <none>   13m   v1.33.5-eks-ecaa3a6
 
+kubectl apply -f netbox-ns.yaml
 kubectl apply -f efs-sc.yaml
-kubectl apply -f efs-pv.yaml
+kubectl apply -f efs-pv-postgres.yaml
+kubectl apply -f efs-pv-redis.yaml
+kubectl apply -f efs-pv-netbox-media.yaml
 
 sudo mkdir /efs
 sudo bash
@@ -40,6 +43,8 @@ chmod 700 get_helm.sh
 
 helm install netbox-postgresql --namespace netbox-actividad3 bitnami/postgresql -f postgres-values.yaml --set global.security.allowInsecureImages=true
 helm install netbox-redis --namespace netbox-actividad3 bitnami/redis -f redis-values.yaml
+
+
 
 kubectl apply -f netbox-configmap.yaml
 kubectl apply -f netbox-secrets.yaml
