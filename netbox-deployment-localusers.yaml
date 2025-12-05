@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: netbox
-  namespace: netbox
+  namespace: netbox-actividad3
   labels:
     k8s-app: netbox
 spec:

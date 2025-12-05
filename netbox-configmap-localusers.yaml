@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: netbox-config
-  namespace: netbox
+  namespace: netbox-actividad3
 data:
   # Ajustes principales (basado en netbox-configmap del repo)
   ALLOWED_HOSTS: "*"
