@@ -59,7 +59,7 @@ spec:
               mountPath: /opt/netbox/netbox/media
       initContainers:
         - name: netbox-init
-          image: netboxcommunity/netbox:2.11.12
+          image: quay.io/netboxcommunity/netbox:latest
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
