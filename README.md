@@ -17,4 +17,5 @@ Despliegue de Netbox en AWS EKS
 3. Despliegue del EFS
 4. Despliegue de una instancia en EC2 para el acceso al clúster
 5. Modificar security groups para permitir el acceso desde el K8s al EFS y a la instancia de EC2
-6. Ejecutar los comandos en la instancia de EC2
+6. Modificar el fs-id del EFS en los archivos de configuración
+7. Ejecutar los comandos en la instancia de EC2

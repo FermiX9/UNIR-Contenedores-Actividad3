@@ -33,6 +33,10 @@ sudo mkdir /efs/redis
 sudo chown -R 1001:1001 /efs/postgres  
 sudo chown -R 1001:1001 /efs/redis
 
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
 
 helm install netbox-postgresql --namespace netbox-actividad3 bitnami/postgresql -f postgres-values.yaml --set global.security.allowInsecureImages=true
 helm install netbox-redis --namespace netbox-actividad3 bitnami/redis -f redis-values.yaml
