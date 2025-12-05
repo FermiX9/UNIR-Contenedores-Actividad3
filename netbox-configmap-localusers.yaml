@@ -13,7 +13,11 @@ data:
   LOGIN_REQUIRED: "true"
   MEDIA_ROOT: /opt/netbox/netbox/media
   REDIS_HOST: netbox-redis-master
+  REDIS_CACHE_HOST: netbox-redis-master
   REDIS_PORT: "6379"
+  REDIS_CACHE_PORT: "6379"
+  REDIS_DATABASE: "0"
+  REDIS_CACHE_DATABASE: "1"
   SUPERUSER_EMAIL: admin@example.com
   SUPERUSER_NAME: admin
   REMOTE_AUTH_ENABLED: "False"
