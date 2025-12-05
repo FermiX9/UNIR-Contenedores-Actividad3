@@ -116,3 +116,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: netbox-media-pvc
+        - name: redis-password
+          secret:
+            secretName: netbox-redis
+            items:
+              - key: redis-password
+                path: redis_password
