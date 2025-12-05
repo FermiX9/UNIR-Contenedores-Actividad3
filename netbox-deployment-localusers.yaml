@@ -6,7 +6,7 @@ metadata:
   labels:
     k8s-app: netbox
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: netbox
@@ -38,7 +38,6 @@ spec:
                 secretKeyRef:
                   name: netbox-secrets
                   key: superuser_password
-            # Variables de DB a nivel de DJANGO/NetBox
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:

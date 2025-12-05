@@ -4,7 +4,6 @@ metadata:
   name: netbox-config
   namespace: netbox-actividad3
 data:
-  # Ajustes principales (basado en netbox-configmap del repo)
   ALLOWED_HOSTS: "*"
   DB_HOST: netbox-postgresql
   DB_NAME: netbox
@@ -16,9 +15,6 @@ data:
   REDIS_PORT: "6379"
   SUPERUSER_EMAIL: admin@example.com
   SUPERUSER_NAME: admin
-  # --- LOCAL AUTH: desactivamos remote/LDAP/SSO ---
   REMOTE_AUTH_ENABLED: "False"
   REMOTE_AUTH_BACKEND: ""
   REMOTE_AUTH_AUTO_CREATE_USER: "False"
-  # -- si en el futuro quieres activar SSO/LDAP, revisa el repo original --
-  # (este repo original provee ejemplos de LDAP/SSO). :contentReference[oaicite:1]{index=1}
