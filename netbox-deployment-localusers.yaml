@@ -67,6 +67,9 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /opt/netbox/netbox/media
+            - name: redis-password
+              mountPath: /run/secrets/redis_password
+              subPath: redis_password
       initContainers:
         - name: netbox-init
           image: quay.io/netboxcommunity/netbox:latest
