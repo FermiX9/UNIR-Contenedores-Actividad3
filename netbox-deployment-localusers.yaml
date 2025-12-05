@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: netbox
-          image: netboxcommunity/netbox:2.11.12 # coincide con versión testeada en repo. :contentReference[oaicite:2]{index=2}
+          image: quay.io/netboxcommunity/netbox:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
