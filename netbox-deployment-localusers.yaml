@@ -63,7 +63,11 @@ spec:
                 secretKeyRef:
                   name: netbox-secrets
                   key: secret_key
-
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: redis_password
           volumeMounts:
             - name: media
               mountPath: /opt/netbox/netbox/media
