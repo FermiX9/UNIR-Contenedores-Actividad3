@@ -97,4 +97,4 @@ spec:
       volumes:
         - name: media
           persistentVolumeClaim:
-            claimName: netbox-media
+            claimName: netbox-media-pvc
