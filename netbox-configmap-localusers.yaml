@@ -6,6 +6,7 @@ metadata:
 data:
   ALLOWED_HOSTS: "*"
   DB_HOST: netbox-postgresql
+  DB_PORT: "5432"
   DB_NAME: netbox
   DB_USER: netbox
   DEBUG: "False"

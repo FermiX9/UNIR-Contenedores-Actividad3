@@ -20,7 +20,7 @@ spec:
           image: quay.io/netboxcommunity/netbox:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
               name: http
           envFrom:
             - configMapRef:
@@ -53,6 +53,11 @@ spec:
                 configMapKeyRef:
                   name: netbox-config
                   key: DB_USER
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: netbox-config
+                  key: DB_PORT
           volumeMounts:
             - name: media
               mountPath: /opt/netbox/netbox/media
