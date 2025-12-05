@@ -58,6 +58,12 @@ spec:
                 configMapKeyRef:
                   name: netbox-config
                   key: DB_PORT
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: secret_key
+
           volumeMounts:
             - name: media
               mountPath: /opt/netbox/netbox/media
