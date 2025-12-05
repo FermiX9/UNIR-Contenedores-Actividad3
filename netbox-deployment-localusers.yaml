@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netbox
+  namespace: netbox
+  labels:
+    app: netbox
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netbox
+  template:
+    metadata:
+      labels:
+        app: netbox
+    spec:
+      containers:
+        - name: netbox
+          image: netboxcommunity/netbox:2.11.12 # coincide con versión testeada en repo. :contentReference[oaicite:2]{index=2}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: netbox-config
+            - secretRef:
+                name: netbox-secrets
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: db_password
+            - name: SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: superuser_password
+            # Variables de DB a nivel de DJANGO/NetBox
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: netbox-config
+                  key: DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: netbox-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: netbox-config
+                  key: DB_USER
+          volumeMounts:
+            - name: media
+              mountPath: /opt/netbox/netbox/media
+      initContainers:
+        - name: netbox-init
+          image: netboxcommunity/netbox:2.11.12
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: netbox-config
+            - secretRef:
+                name: netbox-secrets
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: db_password
+            - name: SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: superuser_password
+          volumeMounts:
+            - name: media
+              mountPath: /opt/netbox/netbox/media
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "Running migrations..."
+              python3 /opt/netbox/netbox/manage.py migrate --noinput
+              echo "Collecting static..."
+              python3 /opt/netbox/netbox/manage.py collectstatic --noinput
+              echo "Creating superuser if not exists..."
+              python3 /opt/netbox/netbox/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); u='${SUPERUSER_NAME}'; e='${SUPERUSER_EMAIL}'; p='${SUPERUSER_PASSWORD}'; \
+                print('checking for',u); \
+                exists = User.objects.filter(username=u).exists(); \
+                (User.objects.create_superuser(u,e,p) if not exists else print('superuser exists'))"
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: netbox-media
