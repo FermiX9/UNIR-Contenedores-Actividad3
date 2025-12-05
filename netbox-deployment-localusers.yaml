@@ -4,16 +4,16 @@ metadata:
   name: netbox
   namespace: netbox
   labels:
-    app: netbox
+    k8s-app: netbox
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: netbox
+      k8s-app: netbox
   template:
     metadata:
       labels:
-        app: netbox
+        k8s-app: netbox
     spec:
       containers:
         - name: netbox
