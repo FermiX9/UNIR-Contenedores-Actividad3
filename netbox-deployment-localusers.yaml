@@ -77,6 +77,11 @@ spec:
                 secretKeyRef:
                   name: netbox-secrets
                   key: superuser_password
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: netbox-secrets
+                  key: secret_key
           volumeMounts:
             - name: media
               mountPath: /opt/netbox/netbox/media
