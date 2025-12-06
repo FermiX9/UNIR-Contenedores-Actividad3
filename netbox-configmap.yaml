@@ -33,10 +33,10 @@ data:
   SUPERUSER_NAME: admin
   MAINTENANCE_MODE: "False"
   DEBUG: "False"
-  REMOTE_AUTH_ENABLED: "True"
-  REMOTE_AUTH_AUTO_CREATE_USER: "True"
+  REMOTE_AUTH_ENABLED: "False"
+  REMOTE_AUTH_AUTO_CREATE_USER: "False"
   # Regular LDAP Backend
-  REMOTE_AUTH_BACKEND: netbox.authentication.LDAPBackend
+  REMOTE_AUTH_BACKEND: netbox.authentication.ModelBackend
   # SSO Enabled Backend
   #REMOTE_AUTH_BACKEND: 'django3_saml2_nbplugin.backends.SAML2CustomAttrUserBackend'
   REMOTE_AUTH_HEADER: "HTTP_REMOTE_USER"
