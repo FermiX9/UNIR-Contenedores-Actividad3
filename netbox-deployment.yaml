@@ -59,9 +59,6 @@ spec:
               mountPath: /run/secrets/napalm_password
               subPath: napalm_password
               readOnly: true
-            - name: redis-password
-              mountPath: /run/secrets/redis_password
-              subPath: redis_password
             - name: secret-key
               mountPath: /run/secrets/secret_key
               subPath: secret_key
